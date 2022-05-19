@@ -18,6 +18,11 @@ public class Group extends AggregateEvent<Group_Id> {
         appendChange(new GroupCreated(quotas)).apply();
     }
 
+    private Group(Group_Id entityId){
+        super(entityId);
+        subscribe(new GroupChange(this));
+    }
+
     public void associateInstructor(Instructor_Id entityId, Name name, Specialty specialty){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(name);
