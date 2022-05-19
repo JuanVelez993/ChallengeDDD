@@ -1,9 +1,11 @@
 package com.sofkau.ChallengeDDD.group;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 import com.sofkau.ChallengeDDD.group.events.*;
 import com.sofkau.ChallengeDDD.group.values.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -21,6 +23,12 @@ public class Group extends AggregateEvent<Group_Id> {
     private Group(Group_Id entityId){
         super(entityId);
         subscribe(new GroupChange(this));
+    }
+
+    public static Group from(Group_Id group_id, List<DomainEvent> events){
+        var group = new Group(group_id);
+        events.forEach(group::applyEvent);
+        return group;
     }
 
     public void associateInstructor(Instructor_Id entityId, Name name, Specialty specialty){
@@ -62,11 +70,11 @@ public class Group extends AggregateEvent<Group_Id> {
 
     }
 
-    public Optional<Instructor> getInstructorById(Instructor_Id instructor_id){
+    protected Optional<Instructor> getInstructorById(Instructor_Id instructor_id){
         return instructors.stream().filter(instructor-> instructor.identity().equals(instructor_id)).findFirst();
     }
 
-    public Optional<Member> getMemberById(Member_Id member_id){
+    protected Optional<Member> getMemberById(Member_Id member_id){
         return members.stream().filter(member-> member.identity().equals(member_id)).findFirst();
     }
 
