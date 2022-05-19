@@ -1,4 +1,10 @@
 package com.sofkau.ChallengeDDD.classroom.values;
 
-public class Equipment_type {
+import co.com.sofka.domain.generic.ValueObject;
+
+public class Equipment_type implements ValueObject<String> {
+    @Override
+    public String value() {
+        return null;
+    }
 }

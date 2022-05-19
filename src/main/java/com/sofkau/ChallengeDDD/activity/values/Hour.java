@@ -1,4 +1,10 @@
 package com.sofkau.ChallengeDDD.activity.values;
 
-public class Hour {
+import co.com.sofka.domain.generic.ValueObject;
+
+public class Hour implements ValueObject<String> {
+    @Override
+    public String value() {
+        return null;
+    }
 }

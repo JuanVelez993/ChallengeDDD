@@ -1,4 +1,10 @@
 package com.sofkau.ChallengeDDD.group.values;
 
-public class Membership {
+import co.com.sofka.domain.generic.ValueObject;
+
+public class Membership implements ValueObject<String> {
+    @Override
+    public String value() {
+        return null;
+    }
 }
