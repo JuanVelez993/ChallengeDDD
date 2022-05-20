@@ -39,6 +39,7 @@ public class Classroom extends AggregateEvent<Classroom_Id> {
         events.forEach(classroom::applyEvent);
         return classroom;
     }
+    //TODO:implement the two aggregates here
     public void associateActivity(Instructor_Id entityId, Name name, Specialty specialty){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(name);
