@@ -16,7 +16,7 @@ public class Membership implements ValueObject<String> {
 
     @Override
     public String value() {
-        return null;
+        return value;
     }
 
     @Override
