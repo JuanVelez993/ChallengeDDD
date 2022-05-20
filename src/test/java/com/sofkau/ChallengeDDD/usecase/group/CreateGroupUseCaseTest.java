@@ -1,4 +1,4 @@
-package com.sofkau.ChallengeDDD.usecase;
+package com.sofkau.ChallengeDDD.usecase.group;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreateGroupUseCaseTest {
     @Test

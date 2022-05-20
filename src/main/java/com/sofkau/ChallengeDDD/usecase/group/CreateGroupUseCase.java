@@ -1,4 +1,4 @@
-package com.sofkau.ChallengeDDD.usecase;
+package com.sofkau.ChallengeDDD.usecase.group;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
@@ -15,7 +15,7 @@ public class CreateGroupUseCase extends UseCase<RequestCommand<CreateGroup>, Res
 
 
         emit().onResponse(new ResponseEvents(
-                group.getUncommittedChanges() //gives me the changes that are not confirmed yet
+                group.getUncommittedChanges()
         ));
     }
 }
