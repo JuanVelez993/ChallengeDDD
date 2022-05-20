@@ -1,11 +1,12 @@
 package com.sofkau.ChallengeDDD.group.commands;
 
+import co.com.sofka.domain.generic.Command;
 import com.sofkau.ChallengeDDD.group.values.Group_Id;
 import com.sofkau.ChallengeDDD.group.values.Member_Id;
 import com.sofkau.ChallengeDDD.group.values.Membership;
 import com.sofkau.ChallengeDDD.group.values.Name;
 
-public class AssociateMember {
+public class AssociateMember extends Command {
     private final Group_Id group_id;
     private final Member_Id member_id;
     private final Name name;

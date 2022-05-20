@@ -5,6 +5,7 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.sofkau.ChallengeDDD.activity.values.Activity_Id;
 import com.sofkau.ChallengeDDD.classroom.events.*;
 import com.sofkau.ChallengeDDD.classroom.values.*;
+import com.sofkau.ChallengeDDD.group.Instructor;
 import com.sofkau.ChallengeDDD.group.events.InstructorAssociated;
 import com.sofkau.ChallengeDDD.group.events.InstructorNameUpdated;
 import com.sofkau.ChallengeDDD.group.events.QuotasUpdated;
@@ -12,6 +13,7 @@ import com.sofkau.ChallengeDDD.group.values.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -88,5 +90,25 @@ public class Classroom extends AggregateEvent<Classroom_Id> {
     public void changePlaylistGenre(Playlist_Id playlist_id,Genre genre){
         appendChange(new PlaylistGenreChanged(playlist_id,genre)).apply();
 
+    }
+
+    protected Optional<Equipment> getEquipmentById(Equipment_Id equipment_id){
+        return equipment.stream().filter(equipment-> equipment.identity().equals(equipment_id)).findFirst();
+    }
+
+    protected Optional<Playlist> getPlaylistById(Playlist_Id playlist_id){
+        return playlists.stream().filter(playlist-> playlist.identity().equals(playlist_id)).findFirst();
+    }
+
+    public Capacity Capacity() {
+        return capacity;
+    }
+
+    public Set<Playlist> Playlists() {
+        return playlists;
+    }
+
+    public Set<Equipment> Equipment() {
+        return equipment;
     }
 }
