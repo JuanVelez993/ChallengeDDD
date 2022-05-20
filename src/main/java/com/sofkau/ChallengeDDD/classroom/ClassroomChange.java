@@ -1,6 +1,7 @@
 package com.sofkau.ChallengeDDD.classroom;
 
 import co.com.sofka.domain.generic.EventChange;
+import com.sofkau.ChallengeDDD.activity.events.Activity_NameChanged;
 import com.sofkau.ChallengeDDD.classroom.events.*;
 
 
@@ -18,6 +19,16 @@ public class ClassroomChange extends EventChange {
 
         apply((CapacityUpdated event)->{
             classroom.capacity= event.getCapacity();
+
+        });
+
+        apply((ActivityAssociated event)->{
+           classroom.activities= event.getActivity_id();
+
+        });
+
+        apply((GroupAssociated event)->{
+            classroom.groups= event.getGroup_id();
 
         });
 

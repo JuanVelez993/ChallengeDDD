@@ -2,10 +2,11 @@ package com.sofkau.ChallengeDDD.classroom;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+
 import com.sofkau.ChallengeDDD.activity.values.Activity_Id;
 import com.sofkau.ChallengeDDD.classroom.events.*;
 import com.sofkau.ChallengeDDD.classroom.values.*;
-import com.sofkau.ChallengeDDD.group.events.InstructorAssociated;
+
 import com.sofkau.ChallengeDDD.group.values.*;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class Classroom extends AggregateEvent<Classroom_Id> {
     protected Capacity capacity;
     protected Set<Playlist> playlists;
     protected Set<Equipment> equipment;
-    protected Set<Group_Id> groups;
-    protected Set<Activity_Id> activities;
+    protected Group_Id groups;
+    protected Activity_Id activities;
 
     public Classroom(Classroom_Id entityId, Capacity capacity) {
         super(entityId);
@@ -37,18 +38,12 @@ public class Classroom extends AggregateEvent<Classroom_Id> {
         return classroom;
     }
     //TODO:implement the two aggregates here
-    public void associateActivity(Instructor_Id entityId, Name name, Specialty specialty){
-        Objects.requireNonNull(entityId);
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(specialty);
-        appendChange(new InstructorAssociated(entityId,name,specialty)).apply();
+    public void associateActivity(Activity_Id activity_id){
+        appendChange(new ActivityAssociated(activity_id)).apply();
     }
 
-    public void associateGroup(Instructor_Id entityId, Name name, Specialty specialty){
-        Objects.requireNonNull(entityId);
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(specialty);
-        appendChange(new InstructorAssociated(entityId,name,specialty)).apply();
+    public void associateGroup(Group_Id group_id){
+        appendChange(new GroupAssociated(group_id)).apply();
     }
 
     public void associateEquipment(Equipment_Id entityId, Equipment_type equipment_type, Brand brand){
