@@ -5,10 +5,7 @@ import co.com.sofka.domain.generic.DomainEvent;
 import com.sofkau.ChallengeDDD.activity.values.Activity_Id;
 import com.sofkau.ChallengeDDD.classroom.events.*;
 import com.sofkau.ChallengeDDD.classroom.values.*;
-import com.sofkau.ChallengeDDD.group.Instructor;
 import com.sofkau.ChallengeDDD.group.events.InstructorAssociated;
-import com.sofkau.ChallengeDDD.group.events.InstructorNameUpdated;
-import com.sofkau.ChallengeDDD.group.events.QuotasUpdated;
 import com.sofkau.ChallengeDDD.group.values.*;
 
 import java.util.List;
