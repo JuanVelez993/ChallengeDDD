@@ -4,13 +4,12 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofkau.ChallengeDDD.activity.events.*;
 import com.sofkau.ChallengeDDD.activity.values.*;
-import com.sofkau.ChallengeDDD.classroom.events.CapacityUpdated;
-import com.sofkau.ChallengeDDD.classroom.events.EquipmentAssociated;
-import com.sofkau.ChallengeDDD.classroom.values.*;
+
 
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Activity extends AggregateEvent<Activity_Id> {
@@ -34,7 +33,7 @@ public class Activity extends AggregateEvent<Activity_Id> {
         return activity;
     }
 
-    public void updateActivity_Name(Activity_Id entityId, Activity_Name activity_name){
+    public void changeActivity_Name(Activity_Id entityId, Activity_Name activity_name){
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(activity_name);
         appendChange(new Activity_NameChanged(entityId,activity_name)).apply();
@@ -76,5 +75,25 @@ public class Activity extends AggregateEvent<Activity_Id> {
         Objects.requireNonNull(entityId);
         Objects.requireNonNull(duration);
         appendChange(new ScheduleDurationUpdated(entityId,duration)).apply();
+    }
+
+    protected Optional<Schedule> getScheduleById(Schedule_Id schedule_id){
+        return schedules.stream().filter(schedule-> schedule.identity().equals(schedule_id)).findFirst();
+    }
+
+    protected Optional<Routine> getRoutineById(Routine_Id routine_id){
+        return routines.stream().filter(routine-> routine.identity().equals(routine_id)).findFirst();
+    }
+
+    public Activity_Name Activity_name() {
+        return activity_name;
+    }
+
+    public Set<Schedule> Schedules() {
+        return schedules;
+    }
+
+    public Set<Routine> Routines() {
+        return routines;
     }
 }
