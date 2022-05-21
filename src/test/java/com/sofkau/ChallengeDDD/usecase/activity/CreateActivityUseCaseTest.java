@@ -35,7 +35,7 @@ class CreateActivityUseCaseTest {
                 .getDomainEvents();
 
         ActivityCreated event = (ActivityCreated) events.get(0);
-        Assertions.assertEquals("Samba",event.getActivity_name().value());
+        Assertions.assertEquals("Abdomen",event.getActivity_name().value());
     }
 
 }

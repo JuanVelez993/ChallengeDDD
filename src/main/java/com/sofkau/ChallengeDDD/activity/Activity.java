@@ -96,4 +96,9 @@ public class Activity extends AggregateEvent<Activity_Id> {
     public Set<Routine> Routines() {
         return routines;
     }
+
+    public void notifyManagment(String note) {
+        Objects.requireNonNull(note);
+        appendChange(new NotificationSent(note)).apply();
+    }
 }
