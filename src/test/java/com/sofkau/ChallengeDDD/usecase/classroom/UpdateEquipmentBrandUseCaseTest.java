@@ -25,7 +25,7 @@ class UpdateEquipmentBrandUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void changeCaseType() {
+    void UpdateEquipmentBrand() {
         
         Classroom_Id classroom_id = Classroom_Id.of("classwithequipment");
         Equipment_Id equipment_id = Equipment_Id.of("equipmentwithwrongbrand");

@@ -29,7 +29,7 @@ class AssociatePlaylistUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void associateInstructorToGroup(){
+    void associatePlaylistToClassroom(){
 
         Classroom_Id classroom_id = Classroom_Id.of("someclassroom");
         Playlist_Id playlist_id= new Playlist_Id();

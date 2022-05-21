@@ -2,6 +2,7 @@ package com.sofkau.ChallengeDDD.group;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+import com.sofkau.ChallengeDDD.activity.events.NotificationSent;
 import com.sofkau.ChallengeDDD.group.events.*;
 import com.sofkau.ChallengeDDD.group.values.*;
 
@@ -88,5 +89,10 @@ public class Group extends AggregateEvent<Group_Id> {
 
     public Set<Member> Members() {
         return members;
+    }
+
+    public void sendEmailToInstructor(String email) {
+        Objects.requireNonNull(email);
+        appendChange(new EmailSent(email)).apply();
     }
 }

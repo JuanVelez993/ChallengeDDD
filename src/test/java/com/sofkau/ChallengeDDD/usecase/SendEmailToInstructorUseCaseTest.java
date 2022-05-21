@@ -6,6 +6,9 @@ import co.com.sofka.business.support.TriggeredEvent;
 import com.sofkau.ChallengeDDD.activity.events.ActivityCreated;
 import com.sofkau.ChallengeDDD.activity.events.NotificationSent;
 import com.sofkau.ChallengeDDD.activity.values.Activity_Name;
+import com.sofkau.ChallengeDDD.group.events.EmailSent;
+import com.sofkau.ChallengeDDD.group.events.GroupCreated;
+import com.sofkau.ChallengeDDD.group.values.Quotas;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,29 +20,30 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
-class NotifyManagmentUseCaseTest  {
+class SendEmailToInstructorUseCaseTest {
+
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void sendNotificationToManagment(){
-        var event = new ActivityCreated(new Activity_Name("weight lifting basics"));
+    void sendEmailToInstructor(){
+        var event = new GroupCreated(new Quotas(25));
 
-        event.setAggregateRootId("newactivity");
-        var useCase = new NotifyManagmentUseCase();
+        event.setAggregateRootId("newgroup");
+        var useCase = new SendEmailToInstructorUseCase();
 
-        Mockito.when(repository.getEventsBy("newactivity")).thenReturn(List.of(event));
+        Mockito.when(repository.getEventsBy("newgroup")).thenReturn(List.of(event));
         useCase.addRepository(repository);
 
         var events = UseCaseHandler
                 .getInstance()
-                .setIdentifyExecutor("newactivity")
+                .setIdentifyExecutor("newgroup")
                 .syncExecutor(useCase, new TriggeredEvent<>(event))
-                .orElseThrow(()->new IllegalArgumentException("Something went wrong while sending the notification"))
+                .orElseThrow(()->new IllegalArgumentException("Something went wrong while sending the email"))
                 .getDomainEvents();
 
-        var notification = (NotificationSent) events.get(0);
-        Assertions.assertEquals("The Activity has been create,please notify Managment so they can offer them to the members", notification.getNote());
-        Mockito.verify(repository).getEventsBy("newactivity");
+        var email = (EmailSent) events.get(0);
+        Assertions.assertEquals("A new group has been created,please check to see if you are assigned", email.getEmail());
+        Mockito.verify(repository).getEventsBy("newgroup");
     }
 }

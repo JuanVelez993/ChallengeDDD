@@ -25,7 +25,7 @@ class UpdatePlaylistSongsUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
-    void changeCaseType() {
+    void UpdatePlaylistSongs() {
 
         Classroom_Id classroom_id = Classroom_Id.of("classwithplaylist");
         Playlist_Id playlist_id = Playlist_Id.of("moresongs");
